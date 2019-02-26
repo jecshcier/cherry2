@@ -1,0 +1,24 @@
+{
+  "name": "cherry2",
+  "version": "1.0.0",
+  "description": "Electron App",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ./main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jecshcier/cherry2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jecshcier/cherry2/issues"
+  },
+  "homepage": "https://github.com/jecshcier/cherry2#readme",
+  "dependencies": {
+    "electron": "^4.0.5",
+    "fs-extra": "^7.0.1",
+    "superagent": "^4.1.0"
+  }
+}
