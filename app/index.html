@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>hello electron</title>
+</head>
+<body>
+	<h1>hello electron!</h1>
+
+	<h2>网络请求</h2>
+	<!-- 网络请求 -->
+	<h4>post请求</h4>
+	<div>
+		<input type="text" placeholder="请求地址">
+		<button onclick="post()">post请求</button>
+	</div>	
+	<h4>get请求</h4>
+	<div>
+		<input type="text" placeholder="请求地址">
+		<button onclick="get()">get请求</button>
+	</div>
+	<h4>文件下载</h4>
+	<h4>文件上传</h4>
+
+	<h2>webview操作</h2>
+	<!-- 文件操作 -->
+	<h4>添加webview</h4>
+	<div>
+		<button onclick="registerWebview()">添加webview</button>
+	</div>
+	<h4>删除webview</h4>
+	<div>
+	<button onclick="removeWebview()">删除webview</button>
+	</div>
+	<h4>获取当前窗口的webview列表</h4>
+	<div>
+		<button onclick="getWebviewList()">获取当前窗口的webview列表</button>
+	</div>
+	<h4>给webview添加devtools</h4	<div>
+		<button onclick="addWebviewDevTools()">添加devtools</button>
+	</div>
+
+
+	<h2>文件操作</h2>
+	<!-- 文件操作 -->
+	<h4>获取文件/文件夹路径</h4>
+	<div>
+		<button onclick="getFilesUrl()">获取文件路径</button>
+	</div>
+	<h4>创建文件</h4>
+	<div>
+		<button onclick="createFile()">创建文件</button>
+	</div>
+	<h4>创建文件夹</h4>
+	<div>
+		<button onclick="createFolder()">创建文件夹</button>
+	</div>
+	<h4>复制文件/文件夹</h4>
+	<div>
+		<button onclick="copyFile()">复制文件/文件夹</button>
+	</div>
+	<h4>移动文件/文件夹</h4>
+	<div>
+		<button onclick="moveFile()">移动文件/文件夹</button>
+	</div>
+	<h4>删除文件/文件夹</h4>
+	<div>
+		<button onclick="deleteFile()">删除文件/文件夹</button>
+	</div>
+	<h4>判断路径是否存在</h4>
+	<div>
+		<button onclick="urlIsExist()">判断路径是否存在</button>
+	</div>
+	<h4>读取文件</h4>
+	<div>
+			<button onclick="loadFile()">读取文件</button>
+	</div>
+	<h4>获取文件夹下所有文件、文件夹</h4>
+	<div>
+			<button onclick="getFolder()">读取文件夹</button>
+	</div>
+	<h4>获取文件/文件夹属性</h4>
+	<div>
+			<button onclick="getFileStats()">获取文件/文件夹属性</button>
+	</div>
+	<h4>打开文件</h4>
+	<div>
+			<button onclick="openFile()">打开文件</button>
+	</div>
+
+	<h2>window操作</h2>
+	<!-- app操作 -->
+	<h4>最大化</h4>
+	<div>
+			<button onclick="maximization()">最大化</button>
+	</div>
+	<h4>最小化</h4>
+	<div>
+			<button onclick="minimize()">最小化</button>
+	</div>
+	<h4>全屏</h4>
+	<div>
+			<button onclick="fullscreen()">全屏</button>
+	</div>
+	<h4>退出</h4>
+	<div>
+			<button onclick="exit()">退出</button>
+	</div>
+
+	<h2>进程操作</h2>
+	<!-- 进程操作 -->
+	<h4>删除进程</h4>
+	<div>
+			<button onclick="killProcess()">删除进程</button>
+	</div>
+
+	<h2>系统操作</h2>
+	<!-- 系统操作 -->
+	<h4>获取当前系统标识</h4>
+	<div>
+			<button onclick="getSystemCode()">获取当前系统标识</button>
+	</div>
+</body>
+<script src="./index.js"></script>
+</html>
