@@ -1,32 +1,60 @@
 const path = require('path')
 const CONFIG = require(path.join(__dirname, `../app/config`))
-const defaultUrl = path.join(__dirname, `../${CONFIG.webview.root}/${CONFIG.webview.defaultUrl}`)
-
+const rootUrl = path.join(__dirname, `../${CONFIG.webview.root}`)
+const {
+	ipcRenderer
+} = require('electron')
+const webviewList = []
 
 onload = () => {
-	const mainWebview = createWebview('mainWebview', {
+	let id = 'mainWebview'
+	let style = {
 		position: 'absolute',
 		top: '0',
 		left: '0',
 		width: '100%',
 		height: '100%'
+	}
+	let src = CONFIG.webview.defaultUrl
+	ipcRenderer.send('registerWebview', {
+		id: id,
+		style: style,
+		src: src
 	})
-
-	document.body.appendChild(mainWebview)
-	mainWebview.addEventListener('dom-ready', () => {
-		mainWebview.openDevTools()
-	})
-
 }
 
 function createWebview(id, style, src) {
-	const webview = document.createElement('webview')
+	let webview = document.createElement('webview')
 	webview.id = id
-	console.log(style)
 	for (let i in style) {
 		webview.style[i] = style[i]
 	}
 	webview.preload = './apps/preload.js'
-	webview.src = defaultUrl
+	webview.src = src
 	return webview
 }
+
+function deleteWebview(id) {
+	let webview = document.getElementById(id)
+	document.body.removeChild(webview)
+}
+
+ipcRenderer.on('registerWebviewCallback', (event, data) => {
+	console.log(data)
+	let url = path.normalize(`${rootUrl}/${data.src}`)
+	let webview = createWebview(data.id, data.style, url)
+	document.body.appendChild(webview)
+})
+
+ipcRenderer.on('removeWebviewCallback', (event, data) => {
+	deleteWebview(data.id)
+})
+
+ipcRenderer.on('addWebviewDevTools', (event, data) => {
+	let webview = document.getElementById(data.id)
+	if (webview.isDevToolsOpened()) {
+		webview.closeDevTools()
+	} else {
+		webview.openDevTools()
+	}
+})

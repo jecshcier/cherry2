@@ -8,6 +8,7 @@ const {
 	dialog,
 	app
 } = require('electron')
+const webviewList = {}
 
 
 module.exports = (ipcMain, win) => {
@@ -209,14 +210,64 @@ module.exports = (ipcMain, win) => {
 		})
 	})
 
+	// 删除进程
+	ipcMain.on('killProcess', async (event, data) => {
+		try {
+			process.kill(data.pid)
+		} catch (err) {
+			console.log(err)
+			event.sender.send(data.callback, callbackObj.error(err))
+		}
+		event.sender.send(data.callback);
+	})
+
+	ipcMain.on('getSystemCode', async (event, data) => {
+		event.sender.send(data.callback, process.platform);
+	})
+
+	ipcMain.on('getWebviewList', async (event, data) => {
+		event.sender.send('getWebviewListCallback', webviewList)
+	})
+
+
+	ipcMain.on('registerWebview', async (event, data) => {
+		webviewList[data.id] = {
+			id: data.id,
+			style: data.style,
+			src: data.src
+		}
+		// 这里是直接向窗口发送消息
+		win.webContents.send('registerWebviewCallback', data)
+	})
+
+	ipcMain.on('removeWebview', async (event, data) => {
+		delete webviewList[data.id]
+		// 这里是直接向窗口发送消息
+		win.webContents.send('removeWebviewCallback', data)
+	})
+
+	ipcMain.on('addWebviewDevTools', async (event, data) => {
+		win.webContents.send('addWebviewDevTools', data)
+	})
+
+	ipcMain.on('createFile6', async (event, data) => {
+
+	})
+
+
+	// window操作
+
+	// 最大化
 	ipcMain.on('Maximization', async (event, data) => {
 		win.maximize()
 	})
 
+	// 最小化
 	ipcMain.on('minimize', async (event, data) => {
 		win.minimize()
 	})
 
+	// 全屏
 	ipcMain.on('fullscreen', async (event, data) => {
 		if (!win.isFullScreen()) {
 			win.setFullScreen(true)
@@ -225,11 +276,8 @@ module.exports = (ipcMain, win) => {
 		}
 	})
 
+	// 退出
 	ipcMain.on('exit', async (event, data) => {
 		app.quit()
-	})
-
-	ipcMain.on('createFile6', async (event, data) => {
-
 	})
 }
