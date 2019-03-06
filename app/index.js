@@ -279,7 +279,7 @@ function execCmd() {
 	app.send('execCommand', {
 		command: 'ls',
 		options: {
-			cwd: null,
+			cwd: '/Users/jecshcier/Documents/jecshcier/project/nodejs/blog',
 			env: null,
 			windowsHide: false,
 			maxBuffer: 200 * 1024

@@ -41,13 +41,20 @@ function deleteWebview(id) {
 
 ipcRenderer.on('registerWebviewCallback', (event, data) => {
 	console.log(data)
-	let url = path.normalize(`${rootUrl}/${data.src}`)
+	let url = data.src
+	console.log(url)
+	if((url.indexOf('http://') !== -1) || (url.indexOf('https://') !== -1)){
+		
+	}else{
+		console.log(rootUrl)
+		url = path.normalize(`${rootUrl}/${data.src}`)
+	}
 	let webview = createWebview(data.id, data.style, url)
 	document.body.appendChild(webview)
-	webview.addEventListener('dom-ready', () => {
-        webview.openDevTools()
-        // webview.loadURL();
-    })
+	// webview.addEventListener('dom-ready', () => {
+ //        webview.openDevTools()
+ //        // webview.loadURL();
+ //    })
 })
 
 ipcRenderer.on('removeWebviewCallback', (event, data) => {

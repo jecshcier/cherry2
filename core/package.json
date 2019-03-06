@@ -4,7 +4,7 @@
   "description": "Electron App",
   "main": "index.js",
   "scripts": {
-    "start": "electron ./main.js"
+    "start": "electron ./index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/jecshcier/cherry2#readme",
   "dependencies": {
-    "electron": "^4.0.5",
     "fs-extra": "^7.0.1",
     "superagent": "^4.1.0"
+  },
+  "devDependencies": {
+    "electron": "^4.0.7"
   }
 }

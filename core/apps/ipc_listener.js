@@ -257,12 +257,21 @@ module.exports = (ipcMain, win) => {
 	})
 
 	ipcMain.on('execCommand', async (event, data) => {
-		if (data.systemKey) {
+		if (typeof(data) === 'string') {
+			try {
+				data = JSON.parse(decodeURI(data))
+			} catch (err) {
+				console.log(err)
+				return false
+			}
+		}
+		if (data.systemKey !== systemKey) {
 			event.sender.send(data.callback, callbackObj.error('systemKey不正确'))
 			return false
 		}
-		child.exec(data.command, data.options,(error, stdout, stderr) => {
+		child.exec(data.command, data.options, (error, stdout, stderr) => {
 			if (error) {
+				console.log(error)
 				event.sender.send(data.callback, callbackObj.error(error))
 			}
 			event.sender.send(data.callback, stdout)
