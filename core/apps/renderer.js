@@ -44,6 +44,10 @@ ipcRenderer.on('registerWebviewCallback', (event, data) => {
 	let url = path.normalize(`${rootUrl}/${data.src}`)
 	let webview = createWebview(data.id, data.style, url)
 	document.body.appendChild(webview)
+	webview.addEventListener('dom-ready', () => {
+        webview.openDevTools()
+        // webview.loadURL();
+    })
 })
 
 ipcRenderer.on('removeWebviewCallback', (event, data) => {
@@ -51,6 +55,7 @@ ipcRenderer.on('removeWebviewCallback', (event, data) => {
 })
 
 ipcRenderer.on('addWebviewDevTools', (event, data) => {
+	console.log(data)
 	let webview = document.getElementById(data.id)
 	if (webview.isDevToolsOpened()) {
 		webview.closeDevTools()

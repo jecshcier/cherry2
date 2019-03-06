@@ -9,6 +9,7 @@ const {
 	app
 } = require('electron')
 const webviewList = {}
+const systemKey = parseInt(Math.random() * 900000 + 100000, 10)
 
 
 module.exports = (ipcMain, win) => {
@@ -247,7 +248,25 @@ module.exports = (ipcMain, win) => {
 	})
 
 	ipcMain.on('addWebviewDevTools', async (event, data) => {
+		console.log(data)
 		win.webContents.send('addWebviewDevTools', data)
+	})
+
+	ipcMain.on('getSystemKey', async (event, data) => {
+		event.sender.send(data.callback, systemKey)
+	})
+
+	ipcMain.on('execCommand', async (event, data) => {
+		if (data.systemKey) {
+			event.sender.send(data.callback, callbackObj.error('systemKey不正确'))
+			return false
+		}
+		child.exec(data.command, data.options,(error, stdout, stderr) => {
+			if (error) {
+				event.sender.send(data.callback, callbackObj.error(error))
+			}
+			event.sender.send(data.callback, stdout)
+		})
 	})
 
 	ipcMain.on('createFile6', async (event, data) => {

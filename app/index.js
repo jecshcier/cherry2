@@ -255,6 +255,36 @@ function getWebviewList() {
 
 function addWebviewDevTools() {
 	app.send('addWebviewDevTools', {
-		id:'mainWebview'
+		id: 'mainWebview'
+	})
+}
+
+let systemKey = 0
+
+function getSystemKey(_this) {
+	app.once('getSystemKeyCallback', function(event, data) {
+		console.log(data)
+		systemKey = data
+		_this.innerHTML = systemKey
+	})
+	app.send('getSystemKey', {
+		callback: 'getSystemKeyCallback'
+	})
+}
+
+function execCmd() {
+	app.once('execCommandCallback', function(event, data) {
+		console.log(data)
+	})
+	app.send('execCommand', {
+		command: 'ls',
+		options: {
+			cwd: null,
+			env: null,
+			windowsHide: false,
+			maxBuffer: 200 * 1024
+		},
+		systemKey: systemKey,
+		callback: 'execCommandCallback'
 	})
 }

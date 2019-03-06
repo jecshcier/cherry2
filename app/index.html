@@ -116,9 +116,17 @@
 
 	<h2>系统操作</h2>
 	<!-- 系统操作 -->
+	<h4>获取systemKey</h4>
+	<div>
+		<button onclick="getSystemKey(this)">获取systemKey</button>
+	</div>
 	<h4>获取当前系统标识</h4>
 	<div>
-			<button onclick="getSystemCode()">获取当前系统标识</button>
+		<button onclick="getSystemCode()">获取当前系统标识</button>
+	</div>
+	<h4>执行终端命令(执行终端命令必须获取systemkey)</h4>
+	<div>
+		<button onclick="execCmd()">执行终端命令</button>
 	</div>
 </body>
 <script src="./index.js"></script>
