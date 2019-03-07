@@ -7,6 +7,7 @@ const {
 const webviewList = []
 
 onload = () => {
+	document.title = CONFIG.window.title
 	let id = 'mainWebview'
 	let style = {
 		position: 'absolute',

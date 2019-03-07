@@ -9,7 +9,7 @@ module.exports = {
 		// 默认高度
 		height: 600,
 		// 默认窗口名称
-		title: "electron",
+		title: "cherry2",
 		// 是否居中
 		center: true,
 		// 是否全屏
