@@ -14,8 +14,8 @@ const CONFIG = require(path.join(__dirname, `../app/config`))
 
 let mainWindow
 
-app.on('ready', () => {
 
+app.on('ready', () => {
 	// 创建主窗口
 	mainWindow = new BrowserWindow(CONFIG.window)
 
@@ -42,7 +42,7 @@ app.on('ready', () => {
 		mainWindow.setMenu(null)
 	} else {
 		let template = [{
-			label: 'cherry2',
+			label: app.getName(),
 			submenu: [{
 				label: '退出',
 				accelerator: 'CmdOrCtrl+Q',
