@@ -54,7 +54,11 @@ app.on('ready', () => {
 				label: '复制',
 				accelerator: 'CmdOrCtrl+C',
 				role: 'copy'
-			}, {
+			},{
+				label: '剪切',
+				accelerator: 'CmdOrCtrl+X',
+				role: 'cut'
+			},{
 				label: '粘贴',
 				accelerator: 'CmdOrCtrl+V',
 				role: 'paste'
