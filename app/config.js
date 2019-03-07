@@ -21,7 +21,6 @@ module.exports = {
 		// 默认放置静态网页的文件夹，可以自定义
 		root: 'app',
 		// 加载完默认webview之后的默认网页
-		// defaultUrl: 'http://localhost:9000'
 		defaultUrl: 'index.html'
 	}
 }

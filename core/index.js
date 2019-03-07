@@ -1,7 +1,9 @@
 const {
 	app,
 	BrowserWindow,
-	ipcMain
+	ipcMain,
+	Menu,
+	shell
 } = require('electron')
 const url = require('url')
 const path = require('path')
@@ -32,7 +34,60 @@ app.on('ready', () => {
 		}
 		mainWindow = null
 	})
-	
+
+	// 去除默认菜单
+
+	if (process.platform !== 'darwin') {
+		mainWindow.setMenu(null)
+	} else {
+		let template = [{
+			label: 'cherry2',
+			submenu: [{
+				label: '退出',
+				accelerator: 'CmdOrCtrl+Q',
+				role: 'quit'
+			}]
+		}, {
+			label: '操作',
+			submenu: [{
+				label: '复制',
+				accelerator: 'CmdOrCtrl+C',
+				role: 'copy'
+			}, {
+				label: '粘贴',
+				accelerator: 'CmdOrCtrl+V',
+				role: 'paste'
+			}, {
+				label: "全选",
+				accelerator: "CmdOrCtrl+A",
+				role: "selectAll"
+			}]
+		}, {
+			label: '窗口',
+			role: 'window',
+			submenu: [{
+				label: '最小化',
+				accelerator: 'CmdOrCtrl+M',
+				role: 'minimize'
+			}, {
+				label: '关闭',
+				accelerator: 'CmdOrCtrl+W',
+				role: 'close'
+			}]
+		}, {
+			label: '帮助',
+			role: 'help',
+			submenu: [{
+				label: '作者',
+				click: function() {
+					shell.openExternal('https://blog.cshayne.cn')
+				}
+			}]
+		}]
+		const menu = Menu.buildFromTemplate(template)
+		Menu.setApplicationMenu(menu) // 设置菜单部分
+	}
+
 	// 开启监听
 	require('./apps/ipc_listener')(ipcMain, mainWindow)
 })

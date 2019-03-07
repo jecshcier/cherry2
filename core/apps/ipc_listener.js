@@ -74,8 +74,9 @@ module.exports = (ipcMain, win) => {
 	ipcMain.on('createFile', async (event, data) => {
 		try {
 			if (data.base64) {
-				const data = new Buffer(data.content, 'base64')
-				await fs.outputFile(data.url, data)
+				const buf = Buffer.from(data.content, 'base64')
+				await fs.ensureFile(data.url)
+				await fs.outputFile(data.url, buf)
 			} else {
 				await fs.outputFile(data.url, data.content)
 			}
