@@ -53,7 +53,7 @@ ipcRenderer.on('registerWebviewCallback', (event, data) => {
 	let webview = createWebview(data.id, data.style, url)
 	document.body.appendChild(webview)
 	webview.addEventListener('dom-ready', () => {
-		webview.executeJavaScript(`window.appData.cwd="${rootUrl)}"`, false, null)
+		webview.executeJavaScript(`window.appData.cwd="${rootUrl.replace(/\\/g,'\\\\')}"`, false, null)
         // webview.openDevTools()
         // webview.loadURL();
     })
