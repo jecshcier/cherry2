@@ -26,6 +26,7 @@ app.on('ready', () => {
 	})
 
 	mainWindow.loadURL(defaultUrl)
+	// mainWindow.webContents.openDevTools()
 
 	mainWindow.on('close', (event) => {
 		if (!mainWindow._closed && process.platform === 'darwin') {

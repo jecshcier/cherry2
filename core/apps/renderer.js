@@ -52,10 +52,11 @@ ipcRenderer.on('registerWebviewCallback', (event, data) => {
 	}
 	let webview = createWebview(data.id, data.style, url)
 	document.body.appendChild(webview)
-	// webview.addEventListener('dom-ready', () => {
- //        webview.openDevTools()
- //        // webview.loadURL();
- //    })
+	webview.addEventListener('dom-ready', () => {
+		webview.executeJavaScript(`window.appData.cwd="${rootUrl)}"`, false, null)
+        // webview.openDevTools()
+        // webview.loadURL();
+    })
 })
 
 ipcRenderer.on('removeWebviewCallback', (event, data) => {
