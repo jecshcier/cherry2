@@ -2,13 +2,17 @@
 开箱即用的electronApp。只要你会前端html+js，即可像发起ajax请求那样执行原生操作！
 
 windows版下载：https://github.com/jecshcier/cherry2/releases/tag/win
+
 mac版下载：https://github.com/jecshcier/cherry2/releases/tag/mac
+
 linux需要自行编译，如有需要，可留issue或者联系我
 
 win版静态资源目录位于：cherry2-win32-x64\resources\app
+
 mac版静态资源目录位于：⁨cherry2⁩ ▸ ⁨Contents⁩ ▸ ⁨Resources⁩ ▸ ⁨app⁩
 
 配置config.js文件即可。
+
 示例代码已给出。
 
 目前完成的接口如下：
