@@ -11,9 +11,9 @@ win版静态资源目录位于：cherry2-win32-x64\resources\app
 
 mac版静态资源目录位于：⁨cherry2⁩ ▸ ⁨Contents⁩ ▸ ⁨Resources⁩ ▸ ⁨app⁩
 
-配置config.js文件即可。
+配置静态资源目录下的config.js文件即可，示例代码已给出。
 
-示例代码已给出。
+
 
 目前完成的接口如下：
 
