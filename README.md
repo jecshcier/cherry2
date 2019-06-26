@@ -5,6 +5,8 @@ windows版下载：https://github.com/jecshcier/cherry2/releases/tag/win
 
 mac版下载：https://github.com/jecshcier/cherry2/releases/tag/mac
 
+
+
 linux需要自行编译，如有需要，可留issue或者联系我
 
 win版静态资源目录位于：cherry2-win32-x64\resources\app
@@ -54,3 +56,6 @@ mac版静态资源目录位于：⁨cherry2⁩ ▸ ⁨Contents⁩ ▸ ⁨Resourc
 - 获取systemKey
 - 获取当前系统标识
 - 执行终端命令(执行终端命令必须获取systemkey)
+
+
+基于cherry开发了一个hugo博客客户端，传送门https://github.com/jecshcier/blog_client_fe
