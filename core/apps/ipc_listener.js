@@ -60,14 +60,14 @@ module.exports = (ipcMain, win) => {
 
 	// 获取文件路径
 	ipcMain.on('getFilesUrl', async (event, data) => {
-		dialog.showOpenDialog({
+		let filePath = dialog.showOpenDialog({
 			'properties': ['openFile', 'openDirectory', 'multiSelections', 'createDirectory', 'promptToCreate']
-		}, (dirPath) => {
-			console.log(dirPath)
-			if (dirPath) {
-				event.sender.send(data.callback, dirPath)
-			}
 		})
+		if(filePath){
+			event.sender.send(data.success, filePath)
+		}else{
+			event.sender.send(data.cancel, filePath)
+		}
 	})
 
 	// 创建文件/图片
