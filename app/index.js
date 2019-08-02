@@ -74,14 +74,14 @@ function loadFile() {
 }
 
 function getFilesUrl() {
+	// 这里需要移除监听事件，否则监听事件被重复添加，会重复执行
+	app.removeAllListeners('getFilesUrlSuccess')
+	app.removeAllListeners('getFilesUrlCancel')
 	app.once('getFilesUrlSuccess', function(event, data) {
-		// 这里需要移除监听事件，否则监听事件被重复添加，会重复执行
-		app.removeAllListeners('getFilesUrlCancel')
 		alert(data)
 	})
 	app.once('getFilesUrlCancel', function(event, data) {
 		// 这里需要移除监听事件，否则监听事件被重复添加，会重复执行
-		app.removeAllListeners('getFilesUrlSuccess')
 		alert("用户取消")
 	})
 	app.send('getFilesUrl', {
