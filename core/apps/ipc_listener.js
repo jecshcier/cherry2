@@ -63,9 +63,9 @@ module.exports = (ipcMain, win) => {
 		let filePath = dialog.showOpenDialog({
 			'properties': ['openFile', 'openDirectory', 'multiSelections', 'createDirectory', 'promptToCreate']
 		})
-		if(filePath){
+		if (filePath) {
 			event.sender.send(data.success, filePath)
-		}else{
+		} else {
 			event.sender.send(data.cancel, filePath)
 		}
 	})
@@ -279,8 +279,19 @@ module.exports = (ipcMain, win) => {
 		})
 	})
 
-	ipcMain.on('createFile6', async (event, data) => {
-
+	ipcMain.on('downloadFile', async (event, data) => {
+		console.log(data)
+		let p = child.fork(`${path.join(__dirname,'download.js')}`, [], {})
+		p.on('message', function(m) {
+			console.log(m)
+		})
+		p.on('close', (code) => {
+			console.log("process EXIT code:" + code)
+		})
+		p.send({
+			url: data.url,
+			saveDir: data.saveDir
+		})
 	})
 
 

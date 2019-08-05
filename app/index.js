@@ -296,3 +296,17 @@ function execCmd() {
 		callback: 'execCommandCallback'
 	})
 }
+
+function downloadFile() {
+	const url = document.getElementById("downloadUrl").value
+	app.removeAllListeners('getFilesUrlSuccess')
+	app.once('getFilesUrlSuccess', function(event, data) {
+		app.send('downloadFile', {
+			saveDir: data,
+			url:url
+		})
+	})
+	app.send('getFilesUrl', {
+		success: 'getFilesUrlSuccess'
+	})
+}
