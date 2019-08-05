@@ -60,10 +60,24 @@ module.exports = (ipcMain, win) => {
 
 	// 获取文件路径
 	ipcMain.on('getFilesUrl', async (event, data) => {
-		let filePath = dialog.showOpenDialog({
-			'properties': ['openFile', 'openDirectory', 'multiSelections', 'createDirectory', 'promptToCreate']
-		})
+		const type = data.type || 'file'
+		let filePath = []
+		if(type === 'file'){
+			filePath = dialog.showOpenDialog({
+				'properties': ['openFile', 'multiSelections', 'createDirectory', 'promptToCreate']
+			})
+		}else{
+			filePath = dialog.showOpenDialog({
+				'properties': ['openDirectory', 'multiSelections', 'createDirectory', 'promptToCreate']
+			})
+		}
+
 		if (filePath) {
+			if(process.platform === "win32"){
+				filePath.forEach((el,index)=>{
+					el = el.replace(/\\/g,'\\\\')
+				})
+			}
 			event.sender.send(data.success, filePath)
 		} else {
 			event.sender.send(data.cancel, filePath)

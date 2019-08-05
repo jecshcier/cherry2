@@ -86,7 +86,9 @@ function getFilesUrl() {
 	})
 	app.send('getFilesUrl', {
 		success: 'getFilesUrlSuccess',
-		cancel: 'getFilesUrlCancel'
+		cancel: 'getFilesUrlCancel',
+		// type - file/dir
+		type:'file'
 	})
 }
 
