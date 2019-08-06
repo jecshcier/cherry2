@@ -287,7 +287,7 @@ module.exports = (ipcMain, win) => {
 		child.exec(data.command, data.options, (error, stdout, stderr) => {
 			if (error) {
 				console.log(error)
-				event.sender.send(data.callback, callbackObj.error(error))
+				event.sender.send(data.callback, callbackObj.error(error.message))
 			}
 			event.sender.send(data.callback, stdout)
 		})
