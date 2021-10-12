@@ -22,6 +22,6 @@
     "superagent": "^4.1.0"
   },
   "devDependencies": {
-    "electron": "^4.0.7"
+    "electron": "^11.5.0"
   }
 }
